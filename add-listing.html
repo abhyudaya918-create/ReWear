@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf8f5">
+    <title>Add a Listing | ReWear</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="listing-page">
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="ReWear home">
+            <span class="brand-mark" aria-hidden="true">↻</span>
+            <span>ReWear</span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="browse.html">Browse</a>
+            <a class="active" href="add-listing.html" aria-current="page">Add Listing</a>
+            <a href="liked-items.html">Liked Items</a>
+        </nav>
+        <div class="account-area">
+            <a class="sign-in-link" data-auth-signin href="sign-in.html">Sign in</a>
+            <a class="profile-link" href="profile.html" aria-label="Profile">
+                <span class="profile-avatar" data-auth-avatar aria-hidden="true">RW</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="page-content">
+        <h1>Give your item a new home.</h1>
+        <p class="page-subtitle">List your item in a few steps and help another student.</p>
+
+        <form class="listing-fields" id="listing-form" aria-label="Listing details" novalidate>
+            <div class="field-group">
+                <label for="item-name">Item name</label>
+                <input id="item-name" name="item-name" type="text" maxlength="100" aria-describedby="item-name-error" placeholder="e.g. Graphing Calculator" required>
+                <p class="field-error" id="item-name-error" role="alert"></p>
+            </div>
+
+            <div class="field-row">
+                <div class="field-group">
+                    <label for="category">Category</label>
+                    <select id="category" name="category" aria-describedby="category-error" required>
+                        <option value="" selected disabled>Select category</option>
+                        <option>Textbooks / Workbooks</option>
+                        <option>Stationery</option>
+                        <option>Uniforms / PE Kits</option>
+                        <option>Art &amp; Craft Supplies</option>
+                        <option>Sports Equipment</option>
+                        <option>Electronics</option>
+                        <option>School Bags / Lunchboxes</option>
+                        <option>Other</option>
+                    </select>
+                    <p class="field-error" id="category-error" role="alert"></p>
+                </div>
+                <div class="field-group">
+                    <label for="condition">Condition</label>
+                    <select id="condition" name="condition" aria-describedby="condition-error" required>
+                        <option value="" selected disabled>Select condition</option>
+                        <option>Good</option>
+                        <option>Medium</option>
+                        <option>Poor</option>
+                    </select>
+                    <p class="field-error" id="condition-error" role="alert"></p>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4" maxlength="2000" aria-describedby="description-error" placeholder="Tell people about your item (brand, size, features, etc.)" required></textarea>
+                <p class="field-error" id="description-error" role="alert"></p>
+            </div>
+
+            <div class="field-group photo-group">
+                <span class="field-label">Photo</span>
+            <div class="upload-area" aria-label="Photo upload area">
+    <br>
+
+    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v5h14v-5"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+    </svg>
+
+    <span id="upload-text">Add a photo</span>
+
+    <input
+        id="photo-input"
+        type="file"
+        accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+        aria-label="Upload photo"
+    >
+
+    <button
+        id="remove-photo"
+        class="remove-photo"
+        type="button"
+        hidden
+    >
+        Remove photo
+    </button>
+
+    <br>
+</div>
+                <p class="photo-note">Optional: JPEG, PNG, or WebP image, up to 5 MB.</p>
+            </div>
+
+<fieldset class="transaction-group">
+    <legend id="transaction-type-label">Transaction type</legend>
+
+    <div class="choice-row" aria-describedby="transaction-type-error">
+        <button type="button" class="choice selected" data-value="Free" aria-pressed="true">
+            Free
+        </button>
+
+        <button type="button" class="choice" data-value="Exchange" aria-pressed="false">
+            Exchange
+        </button>
+    </div>
+    <p class="field-error" id="transaction-type-error" role="alert"></p>
+</fieldset>
+
+<button class="submit-button" type="submit">Create listing</button>
+<p class="form-feedback" id="listing-feedback" role="status" aria-live="polite"></p>
+        </form>
+       </main>
+
+    <script>
+    const photoInput = document.getElementById("photo-input");
+    const removePhoto = document.getElementById("remove-photo");
+    const uploadText = document.getElementById("upload-text");
+    
+
+    photoInput.addEventListener("change", function () {
+        if (photoInput.files.length > 0) {
+            uploadText.textContent = photoInput.files[0].name;
+            removePhoto.hidden = false;
+        }
+    });
+
+    removePhoto.addEventListener("click", function () {
+        photoInput.value = "";
+        uploadText.textContent = "Add a photo";
+        removePhoto.hidden = true;
+    });
+
+
+const transactionChoices = document.querySelectorAll(".choice");
+
+    transactionChoices.forEach(function(choice) {
+        choice.addEventListener("click", function() {
+
+            transactionChoices.forEach(function(option) {
+                option.classList.remove("selected");
+                option.setAttribute("aria-pressed", "false");
+            });
+
+            choice.classList.add("selected");
+            choice.setAttribute("aria-pressed", "true");
+        });
+    });
+
+    document.getElementById("listing-form").addEventListener("reset", function() {
+        uploadText.textContent = "Add a photo";
+        removePhoto.hidden = true;
+    });
+
+</script>
+
+
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="add-listing.js"></script>
+</body>
+</html>
