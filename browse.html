@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf8f5">
+    <title>Browse Items | ReWear</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="browse-page">
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="ReWear home">
+            <span class="brand-mark" aria-hidden="true">↻</span>
+            <span>ReWear</span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a class="active" href="browse.html" aria-current="page">Browse</a>
+            <a href="add-listing.html">Add Listing</a>
+            <a href="liked-items.html">Liked Items</a>
+        </nav>
+        <div class="account-area">
+            <a class="sign-in-link" data-auth-signin href="sign-in.html">Sign in</a>
+            <a class="profile-link" href="profile.html" aria-label="Profile">
+                <span class="profile-avatar" data-auth-avatar aria-hidden="true">RW</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="browse-main">
+        <div class="browse-intro">
+            <p class="home-eyebrow">FIND SOMETHING USEFUL</p>
+            <h1 class="browse-title">Browse items</h1>
+            <p class="browse-description">Explore loved school essentials shared by your community.</p>
+        </div>
+
+        <section class="browse-controls" aria-label="Search and filter listings">
+            <label class="browse-search">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3" stroke="currentColor" stroke-width="1.7"/><path d="m15.5 15.5 4.2 4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                <input id="browse-search" type="search" placeholder="Search items..." aria-label="Search items">
+            </label>
+            <label class="browse-filter">
+                <span class="visually-hidden">Category</span>
+                <select id="browse-category" aria-label="Category">
+                    <option selected>All categories</option>
+                    <option>Textbooks / Workbooks</option>
+                    <option>Stationery</option>
+                    <option>Uniforms / PE Kits</option>
+                    <option>Art &amp; Craft Supplies</option>
+                    <option>Sports Equipment</option>
+                    <option>Electronics</option>
+                    <option>School Bags / Lunchboxes</option>
+                    <option>Other</option>
+                </select>
+            </label>
+            <label class="browse-filter">
+                <span class="visually-hidden">Condition</span>
+                <select id="browse-condition" aria-label="Condition">
+                    <option selected>All conditions</option>
+                    <option>Good</option>
+                    <option>Medium</option>
+                    <option>Poor</option>
+                </select>
+            </label>
+        </section>
+
+        <section class="browse-listings" aria-label="Active listings">
+            <div class="listing-grid" id="browse-listings-grid" aria-live="polite"></div>
+            <p class="listing-load-message" id="browse-listings-status" role="status" aria-live="polite">Loading listings…</p>
+        </section>
+    </main>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="auth.js"></script>
+</body>
+</html>
